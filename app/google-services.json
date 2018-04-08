@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "851758615910",
+    "firebase_url": "https://cloneinsta-2ede0.firebaseio.com",
+    "project_id": "cloneinsta-2ede0",
+    "storage_bucket": "cloneinsta-2ede0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:851758615910:android:f863d23689e74d49",
+        "android_client_info": {
+          "package_name": "com.example.yuxuanli.cloneinsta"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "851758615910-bjhq18pattk19r37ijq3tbsnct5usg6e.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.yuxuanli.cloneinsta",
+            "certificate_hash": "b420bd195118f4422a43abfd41fbc22ee07f9b3e"
+          }
+        },
+        {
+          "client_id": "851758615910-oke9utmn8ae8mgqcdaacia4cjrr5gv36.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAzj1KANspIGt7NL-xdIexh60eMhdWd8yc"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "851758615910-oke9utmn8ae8mgqcdaacia4cjrr5gv36.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
