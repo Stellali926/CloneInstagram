@@ -14,12 +14,15 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.yuxuanli.cloneinsta.Home.HomeActivity;
 import com.example.yuxuanli.cloneinsta.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+
+import org.w3c.dom.Text;
 
 /**
  * Created by yuxuanli on 4/6/18.
@@ -89,15 +92,27 @@ public class LoginActivity extends AppCompatActivity{
                             .addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
                                 @Override
                                 public void onComplete(@NonNull Task<AuthResult> task) {
+
+                                    FirebaseUser user = mAuth.getCurrentUser();
+
                                     if (task.isSuccessful()) {
                                         // Sign in success, update UI with the signed-in user's information
-                                        Log.d(TAG, "signInWithEmail:successful login");
-                                        FirebaseUser user = mAuth.getCurrentUser();
-                                        Toast.makeText(LoginActivity.this, R.string.auth_success,
-                                                Toast.LENGTH_SHORT).show();
+                                        try {
+                                            if(user.isEmailVerified()){
+                                                Log.d(TAG, "onComplete: success, email is verified.");
+                                                Intent intent = new Intent (LoginActivity.this, HomeActivity.class);
+                                                startActivity(intent);
+                                            } else {
+                                                Toast.makeText(mContext, "Email is not verified \n check your email inbox.", Toast.LENGTH_SHORT).show();
+                                                mProgressBar.setVisibility(View.GONE);
+                                                mPleaseWait.setVisibility(View.GONE);
+                                                mAuth.signOut();
+                                            }
 
-                                        mProgressBar.setVisibility(View.GONE);
-                                        mPleaseWait.setVisibility(View.GONE);
+                                        }catch (NullPointerException e) {
+                                            Log.e(TAG, "signInWithEmail: onComplete: " + task.isSuccessful());
+
+                                        }
                                     } else {
                                         // If sign in fails, display a message to the user.
                                         Log.w(TAG, "signInWithEmail:failure", task.getException());
@@ -114,6 +129,26 @@ public class LoginActivity extends AppCompatActivity{
                 }
             }
         });
+
+        TextView linkSignUp = (TextView) findViewById(R.id.link_signup);
+        linkSignUp.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Log.d(TAG, "onClick: navigating to register screen");
+                Intent intent = new Intent (LoginActivity.this, RegisterActivity.class);
+                startActivity(intent);
+            }
+        });
+
+
+        /**
+         * If the user is logged in then navigate to HomeActivity and call 'finish()'
+         */
+        if (mAuth.getCurrentUser() != null) {
+            Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+            startActivity(intent);
+            finish();
+        }
     }
 
     /**
